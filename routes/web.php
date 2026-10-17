@@ -13,7 +13,7 @@ use App\Http\Controllers\Admin\BeritaController;
 use App\Http\Controllers\Admin\LaporanController;
 use App\Http\Controllers\Admin\WargaController;
 use App\Http\Controllers\Admin\KomentarController as AdminKomentarController;
-
+use App\Http\Controllers\Admin\DesaController as AdminDesaController;
 
 // =====================
 // PUBLIK
@@ -103,6 +103,14 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::get('/warga/{warga}/edit', [WargaController::class, 'edit'])->name('admin.warga.edit');
     Route::put('/warga/{warga}', [WargaController::class, 'update'])->name('admin.warga.update');
     Route::delete('/warga/{warga}', [WargaController::class, 'destroy'])->name('admin.warga.destroy');
+
+        // Desa
+    Route::get('/desa', [AdminDesaController::class, 'index'])->name('admin.desa.index');
+    Route::get('/desa/create', [AdminDesaController::class, 'create'])->name('admin.desa.create');
+    Route::post('/desa', [AdminDesaController::class, 'store'])->name('admin.desa.store');
+    Route::get('/desa/{desa}/edit', [AdminDesaController::class, 'edit'])->name('admin.desa.edit');
+    Route::put('/desa/{desa}', [AdminDesaController::class, 'update'])->name('admin.desa.update');
+    Route::delete('/desa/{desa}', [AdminDesaController::class, 'destroy'])->name('admin.desa.destroy');
 
     Route::get('/komentar', [AdminKomentarController::class, 'index'])->name('admin.komentar.index');
     Route::delete('/komentar/{komentar}', [AdminKomentarController::class, 'destroy'])->name('admin.komentar.destroy');

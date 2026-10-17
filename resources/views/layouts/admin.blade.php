@@ -24,25 +24,33 @@
 
         <nav class="flex-1 p-4 space-y-1 text-sm">
             @php
-                $menu = [
-                    ['label' => 'Dashboard', 'url' => url('/admin'),        'ikon' => '📊', 'match' => 'admin'],
-                    ['label' => 'UMKM',      'url' => url('/admin/umkm'),   'ikon' => '🛍️', 'match' => 'admin/umkm*'],
-                    ['label' => 'Wisata',    'url' => url('/admin/wisata'), 'ikon' => '🏞️', 'match' => 'admin/wisata*'],
-                    ['label' => 'Berita',    'url' => url('/admin/berita'), 'ikon' => '📰', 'match' => 'admin/berita*'],
-                    ['label' => 'Laporan',   'url' => url('/admin/laporan'),'ikon' => '💰', 'match' => 'admin/laporan*'],
-                    ['label' => 'Data Warga','url' => url('/admin/warga'),  'ikon' => '👥', 'match' => 'admin/warga*'],
-                    ['label' => 'Komentar',  'url' => url('/admin/komentar'),'ikon' => '💬', 'match' => 'admin/komentar*'],
-                ];
+                        $menu = [
+            ['label' => 'Dashboard', 'url' => url('/admin'),                'ikon' => '📊'],
+            ['label' => 'Desa',      'url' => url('/admin/desa'),           'ikon' => '🏘️'],  // ← BARU
+            ['label' => 'UMKM',      'url' => url('/admin/umkm'),           'ikon' => '🛍️'],
+            ['label' => 'Wisata',    'url' => url('/admin/wisata'),         'ikon' => '🏞️'],
+            ['label' => 'Berita',    'url' => url('/admin/berita'),         'ikon' => '📰'],
+            ['label' => 'Laporan',   'url' => url('/admin/laporan'),        'ikon' => '💰'],
+            ['label' => 'Data Warga','url' => url('/admin/warga'),          'ikon' => '👥'],
+            ['label' => 'Komentar',  'url' => url('/admin/komentar'),       'ikon' => '💬'],
+        ];
             @endphp
 
             @foreach ($menu as $m)
-                <a href="{{ $m['url'] }}"
-                class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-white/10 transition
-                        {{ request()->is($m['match']) ? 'bg-white/15 font-semibold' : '' }}">
-                    <span>{{ $m['ikon'] }}</span>
-                    <span>{{ $m['label'] }}</span>
-                </a>
-            @endforeach
+    @php
+        // Cek menu aktif berdasarkan URL
+        $currentPath = request()->path();
+        $menuPath = ltrim(parse_url($m['url'], PHP_URL_PATH), '/');
+        $isActive = $currentPath === $menuPath
+                    || ($menuPath !== 'admin' && str_starts_with($currentPath, $menuPath . '/'));
+    @endphp
+    <a href="{{ $m['url'] }}"
+       class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-white/10 transition
+              {{ $isActive ? 'bg-white/15 font-semibold' : '' }}">
+        <span>{{ $m['ikon'] }}</span>
+        <span>{{ $m['label'] }}</span>
+    </a>
+@endforeach
         </nav>
 
         <div class="p-4 border-t border-white/20 text-xs">

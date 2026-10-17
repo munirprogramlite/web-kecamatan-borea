@@ -20,11 +20,12 @@ class KecamatanController extends Controller
         $totalUmkm     = Umkm::where('status', 'tayang')->count();
         $totalWisata   = Wisata::where('status', 'tayang')->count();
 
-        $desaList = Desa::orderBy('id')->get();
+        $desaList = Desa::orderBy('nama')->get();   // ← Urut A-Z
 
+        // Ambil 10 berita terbaru (untuk slider)
         $beritaTerbaru = Berita::with('desa')
             ->orderByDesc('tanggal_tayang')
-            ->limit(3)
+            ->limit(10)
             ->get();
 
         return view('kecamatan.index', compact(

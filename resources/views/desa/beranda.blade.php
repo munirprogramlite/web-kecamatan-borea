@@ -4,25 +4,39 @@
 
 @section('content')
 
-    {{-- HERO DENGAN GAMBAR RANDOM --}}
-    <section class="relative text-white overflow-hidden">
-        <img src="https://picsum.photos/seed/{{ $desa->slug }}-hero/1600/600"
-             alt="Desa {{ $desa->nama }}"
-             class="absolute inset-0 w-full h-full object-cover">
-        <div class="absolute inset-0 bg-gradient-to-b from-black/50 via-black/40 to-hijau-daun/80"></div>
+    {{-- HERO --}}
+<section class="relative text-white overflow-hidden">
+    {{-- Background image (auto-detect) --}}
+    <div class="absolute inset-0">
+        @include('partials.image-placeholder', [
+            'tipe' => 'desa',
+            'nama' => $desa->nama,
+            'slug' => $desa->slug,
+            'foto' => $desa->foto ?? null,
+            'kelas' => 'w-full h-full object-cover',
+        ])
+    </div>
+    {{-- Overlay gelap biar teks kebaca --}}
+    <div class="absolute inset-0 bg-gradient-to-b from-black/50 via-black/40 to-hijau-daun/80"></div>
+    {{-- Pattern dekoratif --}}
+    <div class="absolute inset-0 pattern-dots opacity-20"></div>
 
-        <div class="relative max-w-6xl mx-auto px-4 py-16 md:py-24 text-center animate-fade-up">
-            <div class="inline-block px-4 py-1 rounded-full bg-white/20 text-xs font-semibold tracking-wider uppercase mb-4 backdrop-blur-sm">
-                Desa
-            </div>
-            <h1 class="text-4xl md:text-5xl font-poppins font-bold mb-4">
-                {{ $desa->nama }}
-            </h1>
-            <p class="max-w-2xl mx-auto text-base md:text-lg opacity-95 leading-relaxed">
-                {{ $desa->sambutan }}
-            </p>
+    <div class="relative max-w-6xl mx-auto px-4 py-20 md:py-28 text-center animate-fade-up">
+        <div class="inline-block px-4 py-1 rounded-full bg-white/20 text-xs font-semibold tracking-wider uppercase mb-4 backdrop-blur-sm">
+            🏘️ Desa
         </div>
-    </section>
+        <h1 class="text-4xl md:text-6xl font-poppins font-bold mb-4 drop-shadow-lg">
+            {{ $desa->nama }}
+        </h1>
+        <p class="max-w-2xl mx-auto text-base md:text-lg opacity-95 leading-relaxed drop-shadow">
+            {{ $desa->sambutan }}
+        </p>
+    </div>
+
+    <svg class="absolute bottom-0 left-0 w-full h-12 md:h-16" viewBox="0 0 1440 60" preserveAspectRatio="none">
+        <path fill="#FAF7F0" d="M0,30 C240,60 480,0 720,20 C960,40 1200,10 1440,30 L1440,60 L0,60 Z"></path>
+    </svg>
+</section>
 
     {{-- RINGKASAN ANGKA --}}
     <section class="max-w-6xl mx-auto px-4 -mt-10 relative z-10">
