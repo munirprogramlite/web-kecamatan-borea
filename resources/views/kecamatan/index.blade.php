@@ -139,30 +139,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
-    <style>
-        .desaSwiper .swiper-button-next,
-        .desaSwiper .swiper-button-prev,
-        .beritaSwiper .swiper-button-next,
-        .beritaSwiper .swiper-button-prev {
-            color: #2F6B4F;
-            background: white;
-            width: 40px;
-            height: 40px;
-            border-radius: 9999px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        }
-        .desaSwiper .swiper-button-next::after,
-        .desaSwiper .swiper-button-prev::after,
-        .beritaSwiper .swiper-button-next::after,
-        .beritaSwiper .swiper-button-prev::after {
-            font-size: 16px;
-            font-weight: bold;
-        }
-        .desaSwiper .swiper-pagination-bullet-active,
-        .beritaSwiper .swiper-pagination-bullet-active {
-            background: #2F6B4F;
-        }
-    </style>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
 
@@ -172,9 +148,17 @@
             spaceBetween: 24,
             loop: {{ $desaList->count() > 3 ? 'true' : 'false' }},
             speed: 600,
-            grabCursor: true,                  // Kursor berubah jadi tangan 👆
-            simulateTouch: true,               // Izinkan drag pakai mouse di laptop
-            touchStartPreventDefault: false,   // Biar tombol link di dalam kartu tetap bisa diklik
+            grabCursor: true,
+            simulateTouch: true,
+            touchStartPreventDefault: false,
+            
+            // ✨ FITUR SCROLL MOUSE ✨
+            mousewheel: {
+                forceToAxis: true,      // Fokus ke geser horizontal
+                releaseOnEdges: true,   // Kalau slider udah di ujung, scroll kembali ke halaman web
+                sensitivity: 1.5,       // Kecepatan geser (makin besar makin sensitif)
+            },
+
             pagination: {
                 el: '.desaPagination',
                 clickable: true,
@@ -200,9 +184,17 @@
             spaceBetween: 24,
             loop: {{ $beritaTerbaru->count() > 3 ? 'true' : 'false' }},
             speed: 600,
-            grabCursor: true,                  // 👆
-            simulateTouch: true,               // 👆
-            touchStartPreventDefault: false,   // 👆
+            grabCursor: true,
+            simulateTouch: true,
+            touchStartPreventDefault: false,
+            
+            // ✨ FITUR SCROLL MOUSE ✨
+            mousewheel: {
+                forceToAxis: true,
+                releaseOnEdges: true,
+                sensitivity: 1.5,
+            },
+
             pagination: {
                 el: '.beritaPagination',
                 clickable: true,
