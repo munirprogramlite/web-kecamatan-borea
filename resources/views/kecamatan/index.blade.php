@@ -163,55 +163,66 @@
             background: #2F6B4F;
         }
     </style>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // Slider Desa
-            new Swiper('.desaSwiper', {
-                slidesPerView: 1,
-                spaceBetween: 24,
-                loop: {{ $desaList->count() > 3 ? 'true' : 'false' }},
-                pagination: {
-                    el: '.desaPagination',
-                    clickable: true,
-                },
-                navigation: {
-                    nextEl: '.desaNext',
-                    prevEl: '.desaPrev',
-                },
-                breakpoints: {
-                    640: { slidesPerView: 2, spaceBetween: 20 },
-                    1024: { slidesPerView: 3, spaceBetween: 24 },
-                },
-                autoplay: {
-                    delay: 4000,
-                    disableOnInteraction: false,
-                },
-            });
-
-            // Slider Berita
-            new Swiper('.beritaSwiper', {
-                slidesPerView: 1,
-                spaceBetween: 24,
-                loop: {{ $beritaTerbaru->count() > 3 ? 'true' : 'false' }},
-                pagination: {
-                    el: '.beritaPagination',
-                    clickable: true,
-                },
-                navigation: {
-                    nextEl: '.beritaNext',
-                    prevEl: '.beritaPrev',
-                },
-                breakpoints: {
-                    640: { slidesPerView: 2, spaceBetween: 20 },
-                    1024: { slidesPerView: 3, spaceBetween: 24 },
-                },
-                autoplay: {
-                    delay: 4500,
-                    disableOnInteraction: false,
-                },
-            });
+        // ============ Slider Desa ============
+        new Swiper('.desaSwiper', {
+            slidesPerView: 1,
+            spaceBetween: 24,
+            loop: {{ $desaList->count() > 3 ? 'true' : 'false' }},
+            speed: 600,
+            grabCursor: true,                  // Kursor berubah jadi tangan 👆
+            simulateTouch: true,               // Izinkan drag pakai mouse di laptop
+            touchStartPreventDefault: false,   // Biar tombol link di dalam kartu tetap bisa diklik
+            pagination: {
+                el: '.desaPagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.desaNext',
+                prevEl: '.desaPrev',
+            },
+            breakpoints: {
+                640: { slidesPerView: 2, spaceBetween: 20 },
+                1024: { slidesPerView: 3, spaceBetween: 24 },
+            },
+            autoplay: {
+                delay: 6000,
+                disableOnInteraction: false,
+                pauseOnMouseEnter: true,
+            },
         });
-    </script>
+
+        // ============ Slider Berita ============
+        new Swiper('.beritaSwiper', {
+            slidesPerView: 1,
+            spaceBetween: 24,
+            loop: {{ $beritaTerbaru->count() > 3 ? 'true' : 'false' }},
+            speed: 600,
+            grabCursor: true,                  // 👆
+            simulateTouch: true,               // 👆
+            touchStartPreventDefault: false,   // 👆
+            pagination: {
+                el: '.beritaPagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.beritaNext',
+                prevEl: '.beritaPrev',
+            },
+            breakpoints: {
+                640: { slidesPerView: 2, spaceBetween: 20 },
+                1024: { slidesPerView: 3, spaceBetween: 24 },
+            },
+            autoplay: {
+                delay: 8000,
+                disableOnInteraction: false,
+                pauseOnMouseEnter: true,
+            },
+        });
+
+    });
+</script>
 
 @endsection
